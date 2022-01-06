@@ -585,7 +585,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
      * @param y
      * @return
      */
-    fun getAngleForPoint(x: Float, y: Float): Float {
+    private fun getAngleForPoint(x: Float, y: Float): Float {
         val c = getCenter()
         val tx = (x - c.x).toDouble()
         val ty = (y - c.y).toDouble()
@@ -606,7 +606,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
      * @param value
      * @return
      */
-    fun getAngleForValue(value: Float): Float {
+    private fun getAngleForValue(value: Float): Float {
         return value / mMaxValue * 360f
     }
 
@@ -628,7 +628,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
      * @param y
      * @return
      */
-    fun distanceToCenter(x: Float, y: Float): Float {
+    private fun distanceToCenter(x: Float, y: Float): Float {
         val c = getCenter()
         var dist = 0f
         var xDist = 0f
@@ -653,7 +653,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
     /**
      * listener for callbacks when selecting values ontouch
      *
-     * @author Philipp Jahoda
+     * @author John Sung
      */
     interface SelectionListener {
         /**
@@ -690,7 +690,6 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
     }
 
     override fun onDown(e: MotionEvent?): Boolean {
-        // TODO Auto-generated method stub
         return false
     }
 
@@ -700,12 +699,10 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
         velocityX: Float,
         velocityY: Float,
     ): Boolean {
-        // TODO Auto-generated method stub
         return false
     }
 
     override fun onLongPress(e: MotionEvent?) {
-        // TODO Auto-generated method stub
     }
 
     override fun onScroll(
@@ -714,11 +711,9 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
         distanceX: Float,
         distanceY: Float,
     ): Boolean {
-        // TODO Auto-generated method stub
         return false
     }
 
     override fun onShowPress(e: MotionEvent?) {
-        // TODO Auto-generated method stub
     }
 }
