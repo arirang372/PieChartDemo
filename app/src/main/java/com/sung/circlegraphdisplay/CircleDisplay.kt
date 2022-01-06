@@ -12,6 +12,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import java.text.DecimalFormat
+import kotlin.math.acos
+import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class CircleDisplay : View, GestureDetector.OnGestureListener {
     private val LOG_TAG = "CircleDisplay"
@@ -254,7 +258,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
      * @return
      */
     fun getDiameter(): Float {
-        return Math.min(width, height).toFloat()
+        return min(width, height).toFloat()
     }
 
     /**
@@ -403,13 +407,13 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
     }
 
     /** paint used for drawing the text  */
-    val PAINT_TEXT = 1
+    private val PAINT_TEXT = 1
 
     /** paint representing the value bar  */
-    val PAINT_ARC = 2
+    private val PAINT_ARC = 2
 
     /** paint representing the inner (by default white) area  */
-    val PAINT_INNER = 3
+    private val PAINT_INNER = 3
 
     /**
      * sets the given paint object to be used instead of the original/default
@@ -589,14 +593,14 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
         val c = getCenter()
         val tx = (x - c.x).toDouble()
         val ty = (y - c.y).toDouble()
-        val length = Math.sqrt(tx * tx + ty * ty)
-        val r = Math.acos(ty / length)
+        val length = sqrt(tx * tx + ty * ty)
+        val r = acos(ty / length)
         var angle = Math.toDegrees(r).toFloat()
         if (x > c.x) angle = 360f - angle
-        angle = angle + 180
+        angle += 180
 
         // neutralize overflow
-        if (angle > 360f) angle = angle - 360f
+        if (angle > 360f) angle -= 360f
         return angle
     }
 
@@ -645,8 +649,7 @@ class CircleDisplay : View, GestureDetector.OnGestureListener {
         }
 
         // pythagoras
-        dist = Math.sqrt(Math.pow(xDist.toDouble(), 2.0) + Math.pow(yDist.toDouble(), 2.0))
-            .toFloat()
+        dist = sqrt(xDist.toDouble().pow(2.0) + yDist.toDouble().pow(2.0)).toFloat()
         return dist
     }
 
